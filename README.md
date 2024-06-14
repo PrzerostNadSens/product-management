@@ -42,7 +42,7 @@ This project is a web application for managing products. It includes both backen
 
 4. Access the application:
 
-   - **Frontend:** [http://localhost:3000](http://localhost:3000)
+   - **Frontend:** [http://localhost:3001](http://localhost:3001)
 
 ## API Documentation
 
