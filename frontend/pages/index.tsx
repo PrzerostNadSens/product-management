@@ -7,6 +7,9 @@ import styles from "./styles/Home.module.css";
 type Product = {
   id: string;
   name: string;
+  description: string;
+  price: number;
+  stock: number;
 };
 
 export default function Home() {
@@ -57,7 +60,7 @@ export default function Home() {
             {products.map((product) => (
               <tr key={product.id}>
                 <td>
-                  <Link href={`/products/${product.id}`}>
+                  <Link href={`/get/${product.id}`}>
                     <a>{product.name}</a>
                   </Link>
                 </td>
