@@ -1,3 +1,4 @@
+/* styles/Home.module.css */
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -6,30 +7,18 @@
 
 .addButton {
   display: block;
-  margin-bottom: 20px;
+  width: 200px;
+  margin: 20px 0;
   padding: 10px;
+  text-align: center;
   background-color: #0070f3;
   color: white;
   text-decoration: none;
-  text-align: center;
   border-radius: 5px;
-}
-
-.addProductForm {
-  background-color: #f0f0f0;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-}
-
-.error {
-  color: red;
 }
 
 .productList {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
+  margin-top: 20px;
 }
 
 .table {
@@ -44,21 +33,7 @@
   text-align: left;
 }
 
-.editButton,
-.deleteButton {
-  display: inline-block;
-  padding: 8px 12px;
-  margin-right: 5px;
-  text-decoration: none;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.editButton {
-  background-color: #0070f3;
-}
-
-.deleteButton {
-  background-color: #f00;
+.error {
+  color: red;
+  margin-top: 10px;
 }

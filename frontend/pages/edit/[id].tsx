@@ -14,9 +14,6 @@ type Product = {
 };
 
 export default function EditProduct() {
-  const router = useRouter();
-  const { id } = router.query;
-
   const [product, setProduct] = useState<Product>({
     id: "",
     name: "",
@@ -25,21 +22,25 @@ export default function EditProduct() {
     stock: 0,
   });
   const [error, setError] = useState("");
+  const router = useRouter();
+  const { id } = router.query;
 
   useEffect(() => {
-    if (typeof id === "string") {
-      fetchProduct(id);
+    if (id) {
+      fetchProductDetails(id as string);
     }
   }, [id]);
 
-  const fetchProduct = async (productId: string) => {
+  const fetchProductDetails = async (productId: string) => {
     try {
-      const response = await axios.get<Product>(`/api/products/${productId}`);
+      const response = await axios.get<Product>(
+        `/api/products?id=${productId}`
+      );
       setProduct(response.data);
       setError("");
     } catch (error) {
-      setError("Error fetching product");
-      console.error("Error fetching product:", error);
+      setError("Error fetching product details");
+      console.error("Error fetching product details:", error);
     }
   };
 
@@ -49,26 +50,28 @@ export default function EditProduct() {
     const { name, value } = e.target;
     setProduct((prevState) => ({
       ...prevState,
-      [name]: name === "price" || name === "stock" ? parseInt(value) : value,
+      [name]: name === "price" || name === "stock" ? parseFloat(value) : value,
     }));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await axios.put(`/api/products/${id}`, product);
-      router.push("/");
+      await axios.put(`/api/products?id=${product.id}`, product);
+      router.push(`/products/${product.id}`);
     } catch (error) {
       setError("Error updating product");
       console.error("Error updating product:", error);
     }
   };
 
+  if (!product.id) return <p>Loading...</p>;
+
   return (
     <div className={styles.container}>
       <h1>Edit Product</h1>
       {error && <p className={styles.error}>{error}</p>}
-      <div className={styles.addProductForm}>
+      <div className={styles.addEditProductForm}>
         <form onSubmit={handleSubmit}>
           <div>
             <label>Name</label>
@@ -111,7 +114,7 @@ export default function EditProduct() {
           </div>
           <div className={styles.formButtons}>
             <button type="submit">Update Product</button>
-            <Link href="/">
+            <Link href={`/products/${product.id}`}>
               <a className={styles.cancelButton}>Cancel</a>
             </Link>
           </div>
