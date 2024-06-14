@@ -1,0 +1,53 @@
+/* styles/AddEditProduct.module.css */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.addEditProductForm {
+  margin-top: 20px;
+}
+
+.addEditProductForm form {
+  display: flex;
+  flex-direction: column;
+}
+
+.addEditProductForm label {
+  margin-bottom: 5px;
+}
+
+.addEditProductForm input,
+.addEditProductForm textarea {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.addEditProductForm button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.addEditProductForm button:hover {
+  background-color: #0056b3;
+}
+
+.cancelButton {
+  margin-left: 10px;
+  padding: 10px;
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.cancelButton:hover {
+  text-decoration: underline;
+}
