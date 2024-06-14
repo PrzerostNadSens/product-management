@@ -33,7 +33,7 @@ export default function Home() {
 
   const deleteProduct = async (id: string) => {
     try {
-      await axios.delete(`/api/products/${id}`);
+      await axios.delete(`/api/products?id=${id}`);
       setProducts(products.filter((p) => p.id !== id));
     } catch (error) {
       setError("Error deleting product");

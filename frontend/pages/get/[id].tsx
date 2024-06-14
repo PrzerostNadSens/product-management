@@ -47,7 +47,7 @@ export default function ProductDetails() {
   const deleteProduct = async () => {
     try {
       if (product) {
-        await axios.delete(`/api/products/${product.id}`);
+        await axios.delete(`/api/products?id=${id}`);
         router.push("/");
       }
     } catch (error) {
@@ -82,6 +82,9 @@ export default function ProductDetails() {
           <button className={styles.deleteButton} onClick={deleteProduct}>
             Delete
           </button>
+          <Link href="/">
+            <a className={styles.cancelButton}>Cancel</a>
+          </Link>
         </div>
       </div>
     </div>
