@@ -2,13 +2,23 @@ import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import axios from "axios";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/AddEditProduct.module.css";
 import { useRouter } from "next/router";
+
+type Product = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+};
 
 export default function EditProduct() {
   const router = useRouter();
   const { id } = router.query;
-  const [product, setProduct] = useState({
+
+  const [product, setProduct] = useState<Product>({
+    id: "",
     name: "",
     description: "",
     price: 0,
@@ -17,14 +27,14 @@ export default function EditProduct() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (id && typeof id === "string") {
-      fetchProduct(parseInt(id));
+    if (typeof id === "string") {
+      fetchProduct(id);
     }
   }, [id]);
 
-  const fetchProduct = async (productId) => {
+  const fetchProduct = async (productId: string) => {
     try {
-      const response = await axios.get(`/api/products/${productId}`);
+      const response = await axios.get<Product>(`/api/products/${productId}`);
       setProduct(response.data);
       setError("");
     } catch (error) {
@@ -33,7 +43,9 @@ export default function EditProduct() {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setProduct((prevState) => ({
       ...prevState,
@@ -41,7 +53,7 @@ export default function EditProduct() {
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       await axios.put(`/api/products/${id}`, product);
